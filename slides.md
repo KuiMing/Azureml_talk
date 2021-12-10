@@ -1174,6 +1174,47 @@ if __name__ == "__main__":
 
 <img src=media/ml_35.PNG width=40%></img>
 
+----
+
+以上流程，很像某個龜毛人在買雞排～～～
+
+----
+
+<!-- .slide: data-auto-animate -->
+
+
+<img src="media/call.png" style="height: 300px; position: absolute; top: -10%; left: 80%;">
+<img src="media/food_stand.png" style="height: 200px; position: absolute; top: 80%; left: -10%;">
+
+- 雞的品種要烏骨雞<!-- .element: class="fragment" data-fragment-index="1" -->
+- 雞排重量至少200公克<!-- .element: class="fragment" data-fragment-index="2" -->
+- 雞排要用胡椒粉醃過24小時<!-- .element: class="fragment" data-fragment-index="3" -->
+- 油溫 170°C<!-- .element: class="fragment" data-fragment-index="4" -->
+- 油炸三分鐘<!-- .element: class="fragment" data-fragment-index="5" -->
+- 瀝油五分鐘<!-- .element: class="fragment" data-fragment-index="6" -->
+- 切成25塊<!-- .element: class="fragment" data-fragment-index="7" -->
+- 胡椒粉跟辣椒粉各撒一次<!-- .element: class="fragment" data-fragment-index="8" -->
+- 放兩根竹籤，全程錄影紀錄<!-- .element: class="fragment" data-fragment-index="9" -->
+
+----
+
+<!-- .slide: data-auto-animate -->
+<img src="media/call.png" style="height: 150px; position: absolute; top: 0%; left: 80%;">
+<img src="media/food_stand.png" style="height: 400px; position: absolute; top: 40%; left: -15%;">
+
+- ~~神經喔！無愛來茲亂啦~~<br><!-- .element: class="fragment" data-fragment-index="1" -->
+- <font color='red'>好的，重複你的餐點～～</font><!-- .element: class="fragment" data-fragment-index="2" -->
+- 雞的品種要烏骨雞<!-- .element: class="fragment" data-fragment-index="3" -->
+- 雞排重量至少200公克<!-- .element: class="fragment" data-fragment-index="3" -->
+- 雞排要用胡椒粉醃過24小時<!-- .element: class="fragment" data-fragment-index="3" -->
+- 油溫 170°C<!-- .element: class="fragment" data-fragment-index="3" -->
+- 油炸三分鐘<!-- .element: class="fragment" data-fragment-index="3" -->
+- 瀝油五分鐘<!-- .element: class="fragment" data-fragment-index="3" -->
+- 切成25塊<!-- .element: class="fragment" data-fragment-index="3" -->
+- 胡椒粉跟辣椒粉各撒一次<!-- .element: class="fragment" data-fragment-index="3" -->
+- 放兩根竹籤，全程錄影紀錄<!-- .element: class="fragment" data-fragment-index="3" -->
+
+
 ---
 
 # 讓服務自給自足
