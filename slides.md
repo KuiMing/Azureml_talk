@@ -1,4 +1,5 @@
-# Azure Machine Learning 一條龍服務
+# Azure Machine Learning 
+# 一條龍服務
 
 ---
 
@@ -1186,8 +1187,8 @@ if __name__ == "__main__":
 <img src="media/call.png" style="height: 300px; position: absolute; top: -10%; left: 80%;">
 <img src="media/food_stand.png" style="height: 200px; position: absolute; top: 80%; left: -10%;">
 
-- 雞的品種要烏骨雞<!-- .element: class="fragment" data-fragment-index="1" -->
-- 雞排重量至少200公克<!-- .element: class="fragment" data-fragment-index="2" -->
+- 我等等帶烏骨雞過去<!-- .element: class="fragment" data-fragment-index="1" -->
+- 幫我切出雞排重量至少200公克<!-- .element: class="fragment" data-fragment-index="2" -->
 - 雞排要用胡椒粉醃過24小時<!-- .element: class="fragment" data-fragment-index="3" -->
 - 油溫 170°C<!-- .element: class="fragment" data-fragment-index="4" -->
 - 油炸三分鐘<!-- .element: class="fragment" data-fragment-index="5" -->
@@ -1226,6 +1227,32 @@ if __name__ == "__main__":
 
 ----
 
+
+<img src="media/call.png" style="height: 300px; position: absolute; top: 0%; left: 80%;">
+<img src="media/food_stand.png" style="height: 200px; position: absolute; top: 60%; left: -10%;">
+
+### Pipeline
+
+- 老闆，我要龜毛人雞排！
+
+![](media/note.png)
+
+----
+
+
+<img src="media/call.png" style="height: 300px; position: absolute; top: 0%; left: 80%;">
+<img src="media/food_stand.png" style="height: 200px; position: absolute; top: 60%; left: -10%;">
+
+### Schedule
+
+- 老闆，以後每個禮拜天晚上六點半
+- 我都要一份龜毛人雞排！
+
+<img src=media/note.png width="50%">
+
+
+----
+
 ### 安裝`Python`套件
 
 請在本機端安裝
@@ -1235,7 +1262,8 @@ pip3.7 install azureml-pipeline
 
 ---
 
-## Pipeline for data
+## Pipeline
+## Data, Model & Service
 
 ----
 
@@ -1249,7 +1277,7 @@ pip3.7 install azureml-pipeline
 
 ----
 
-### 在`workspace`執行的 code
+### 在`workspace`準備 Data
 
 `get_currency.py`
 ```python [58,61-64|65-67]
@@ -1326,109 +1354,9 @@ if __name__ == "__main__":
 
 ```
 
-----
-
-## 我踩過的雷
-
-- Error!!!: ***Graph shouldn't have cycles***
-  - 輸入的資料夾路徑和輸出的資料夾路徑不能為同一個路徑
-  - 讓資料先暫存，之後再推向 datastore
 
 ----
 
-## 在本地端執行的 code
-
-`run_pipeline_data.py`
-```python [15-20|21-26|28,30|33,36,41,43|47-51|53-58]
-import os
-from azureml.data import OutputFileDatasetConfig
-from azureml.pipeline.steps import PythonScriptStep
-from azureml.core.runconfig import RunConfiguration
-from azureml.core import Workspace, Experiment, Dataset
-from azureml.core.authentication import InteractiveLoginAuthentication
-from azureml.pipeline.core import Pipeline
-
-
-def main():
-    # 起手式，一定要先取得 workspace 權限
-    interactive_auth = InteractiveLoginAuthentication(tenant_id=os.getenv("TENANT_ID"))
-    work_space = Workspace.from_config(auth=interactive_auth)
-    datastore = work_space.get_default_datastore()
-    # 設定 input folder 
-    input_folder = (
-        Dataset.File.from_files(path=(datastore, "currency"))
-        .as_named_input("input_folder")
-        .as_mount()
-    )
-    # 設定 output 路徑
-    dataset = (
-        OutputFileDatasetConfig(name="usd_twd", destination=(datastore, "currency"))
-        .as_upload(overwrite=True)
-        .register_on_complete(name="currency")
-    )
-    
-    # 選擇之前註冊的環境
-    aml_run_config = RunConfiguration()
-    environment = work_space.environments["train_lstm"]
-    aml_run_config.environment = environment
-    
-    # 設定管線中的步驟，把會用到的 py 檔、輸入和輸出的資料夾帶入
-    get_currency = PythonScriptStep(
-        name="get_currency",
-        script_name="get_currency.py",
-        compute_target="cpu-cluster",
-        runconfig=aml_run_config,
-        arguments=[
-            "--target_folder",
-            dataset,
-            "--input",
-            input_folder,
-        ],
-        allow_reuse=True,
-    )
-    # pipeline 的本質還是實驗，所以需要建立實驗，再把 pipeline帶入
-    experiment = Experiment(work_space, "get_currency")
-
-    pipeline = Pipeline(workspace=work_space, steps=[get_currency])
-    run = experiment.submit(pipeline)
-    run.wait_for_completion(show_output=True)
-    # 執行終了，發布 pipeline，以便可以重複使用 
-    run.publish_pipeline(
-        name="get_currency_pipeline",
-        description="Get currency with pipeline",
-        version="1.0",
-    )
-
-
-if __name__ == "__main__":
-    main()
-
-```
-
-----
-
-<!-- .slide: data-background-color="#ffffff" data-background="media/ml_28.png" -->
-
-`python3.7 run_pipeline_data.py`<!-- .element: class="fragment" data-fragment-index="1" -->
-
-
-
-----
-
-<!-- .slide: data-background-color="#ffffff" data-background="media/ml_29.png" -->
-點進`步驟`，再點選執行完的步驟，則會看到該實驗的各種細節，也方便後續除錯。
-
-
-
-----
-
-
-<!-- .slide: data-background-color="#ffffff" data-background="media/ml_14.png" -->
-
----
-## Pipeline for model and service
-
-----
 
 ## 更新 Model
 
@@ -1438,7 +1366,7 @@ if __name__ == "__main__":
 
 ----
 
-## 更新 Model
+## 在`workspace`要求`workspace`更新 Model
 
 
 `train_lstm.py`
@@ -1636,7 +1564,7 @@ if __name__ == "__main__":
 
 ----
 
-## 利用`pipeline`部署
+## 在`workspace`要求`workspace`部署服務
 
 `deploy_currency_prediction.py`
 ```python [15-22]
@@ -1689,13 +1617,20 @@ if __name__ == "__main__":
 
 ```
 
+----
+
+## 我踩過的雷
+
+- Error!!!: ***Graph shouldn't have cycles***
+  - 輸入的資料夾路徑和輸出的資料夾路徑不能為同一個路徑
+  - 讓資料先暫存，之後再推向 datastore
 
 ----
 
 ## 執行`pipeline`
 
 `run_pipeline.py`
-```python [25-39|40-49|50-58|61|64-69]
+```python [14-18|19-21|25-39|40-49|50-58|61|64-69]
 import os
 from azureml.data import OutputFileDatasetConfig
 from azureml.pipeline.steps import PythonScriptStep
@@ -1780,6 +1715,17 @@ if __name__ == "__main__":
 
 `python3.7 run_pipeline.py`
 
+----
+
+<!-- .slide: data-background-color="#ffffff" data-background="media/ml_29.png" -->
+點進`步驟`，再點選執行完的步驟，則會看到該實驗的各種細節，也方便後續除錯。
+
+
+
+----
+
+
+<!-- .slide: data-background-color="#ffffff" data-background="media/ml_14.png" -->
 
 ---
 
