@@ -1,7 +1,11 @@
+
+
 # Azure Machine Learning Advance
 ## Do All the things with Python
+<!-- .slide: data-background="media/global_ai.jpg" -->
 
 ---
+
 
 <!-- .slide: data-background="media/Ben.png" -->
 
