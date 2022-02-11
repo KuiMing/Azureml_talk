@@ -86,16 +86,24 @@ sudo apt-get install azure-cli
 ```
 az login
 ```
-- <font color=yellow>The default web browser has been opened at https://login.microsoftonline.com/common/oauth2/authorize. Please continue the login in the web browser. If no web browser is available or if the web browser fails to open, use device code flow with </font>
-
-```
-az login --use-device-code
-```
-
+- <font color=yellow>The default web browser has been opened at https://login.microsoftonline.com/common/oauth2/authorize. Please continue the login in the web browser.
 ----
 
 ![](media/azure_login_2.png)
 
+
+----
+
+## 登入 Azure
+
+- If no web browser is available or if the web browser fails to open, use device code flow with </font>
+
+```
+az login --use-device-code
+```
+- Open a browser window and navigate to: https://microsoft.com/devicelogin
+- Enter the code displayed in the terminal
+![](media/azure_login.png)
 
 ----
 
