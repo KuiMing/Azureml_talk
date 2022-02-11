@@ -642,7 +642,7 @@ environment.docker.base_image = "mcr.microsoft.com/azureml/intelmpi2018.3-ubuntu
 
 
 `train_lstm.py`
-```python [62|81|101-109|112-113]
+```python [5-6|76-79|62|81|91|101-109|112-113]
 import argparse
 import os
 import pickle
