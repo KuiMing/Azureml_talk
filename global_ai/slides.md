@@ -451,7 +451,7 @@ if __name__ == "__main__":
 ```bash
 python3.7 upload_file.py \
 --folder currency \
---target_path currency \
+--target_folder currency \
 --dataname currency
 ```
 
