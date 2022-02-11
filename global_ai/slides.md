@@ -631,8 +631,8 @@ environment.docker.base_image = "mcr.microsoft.com/azureml/intelmpi2018.3-ubuntu
   2.  `run_experiment_training.py` 在本機執行
       - 上傳`train_lstm.py`
       - 通知`workspace`開始執行`train_lstm.py`
-      - 註冊模型
       - 利用`tensorboard`觀察訓練過程中的各項數值
+      - 註冊模型
 
 
 ----
